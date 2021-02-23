@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-
+using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Infrastructe.Data;
 
@@ -32,6 +32,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddControllers();
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen(c =>
